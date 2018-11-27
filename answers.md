@@ -6,8 +6,8 @@ All in all a race condition develops if two ore more processes want to write som
   2. Why? If a process is caught in a while, needing some other information from another process, which doesn't get it's time to work, the process will wait endless on a single core machine.
 
 # Peterson's solution
-  1.
-  1.1 -Process 0 calls enter_region():
+  1. Scenarios
+   ..1. -Process 0 calls enter_region():
       other = 1;
       interested[0] = true;
       loser = 0;
@@ -19,10 +19,10 @@ All in all a race condition develops if two ore more processes want to write som
       loser = 1;
       while(loser == process && interested[other]);
     since process 0 is interested, process 1 stays in the while loop.
-    -Process 0 calls leave_region():
+  ..2.  -Process 0 calls leave_region():
       interested[0] = false;
     process 1 leaves the waiting loop now and enters the critical region.
- 1.2 it is nearly the same as the first one, but this time you cannot say which of the processes will enter the critical region first. the one who writes on the loser variable the latest, will be the loser. the other will be able to enter the region.
+  it is nearly the same as the first one, but this time you cannot say which of the processes will enter the critical region first. the one who writes on the loser variable the latest, will be the loser. the other will be able to enter the region.
   2. since loser just can have one value - also when two processes at the same time write something on the same location, our nice scheduler will decide for one. :) The only problem that I see is, if the process in the critical region fails, or whatever and does not go to the point where it could say, Ok i am not interested anymore. So when another process is waiting, they'll wait endless.
   3. So, the loser variable determines which of the processes have to wait when both are interested. Loser just has a effect, when both are interested as said before.
   #### 4.
