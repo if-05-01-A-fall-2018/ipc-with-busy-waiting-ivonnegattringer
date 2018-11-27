@@ -7,7 +7,7 @@ All in all a race condition develops if two ore more processes want to write som
 
 # Peterson's solution
   1. Scenarios
-   ..1. -Process 0 calls enter_region():
+    ⋅⋅1. -Process 0 calls enter_region():
       other = 1;
       interested[0] = true;
       loser = 0;
@@ -19,7 +19,7 @@ All in all a race condition develops if two ore more processes want to write som
       loser = 1;
       while(loser == process && interested[other]);
     since process 0 is interested, process 1 stays in the while loop.
-  ..2. -Process 0 calls leave_region():
+  ⋅⋅2. -Process 0 calls leave_region():
       interested[0] = false;
     process 1 leaves the waiting loop now and enters the critical region.
   it is nearly the same as the first one, but this time you cannot say which of the processes will enter the critical region first. the one who writes on the loser variable the latest, will be the loser. the other will be able to enter the region.
