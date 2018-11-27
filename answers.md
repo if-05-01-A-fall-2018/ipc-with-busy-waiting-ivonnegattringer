@@ -21,7 +21,7 @@ All in all a race condition develops if two ore more processes want to write som
       while(loser == process && interested[other]);
     since process 0 is interested, process 1 stays in the while loop.
 
-    ###Scenario 2
+  ###Scenario 2
    -Process 0 calls leave_region():
       interested[0] = false;
     process 1 leaves the waiting loop now and enters the critical region.
